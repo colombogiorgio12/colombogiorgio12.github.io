@@ -3,86 +3,118 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Giorgio Colombo — Personal Website</title>
-  <meta name="description" content="Portfolio, publications, and projects by Giorgio Colombo." />
+  <title>Giorgio Colombo — UX Researcher</title>
+  <meta name="description" content="Giorgio Colombo — PhD UX Researcher. Spatial navigation, digital health, and usable AI." />
 
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Giorgio Colombo — Personal Website" />
-  <meta property="og:description" content="Portfolio, publications, and projects." />
+  <meta property="og:title" content="Giorgio Colombo — UX Researcher" />
+  <meta property="og:description" content="Spatial navigation, digital health, and usable AI." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://your-domain.com" />
   <meta property="og:image" content="/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- PWA basics (optional icons) -->
   <link rel="icon" href="/favicon.ico" />
 
   <style>
+    /* --- System font stack (Apple-like) --- */
     :root{
-      --bg: #0b0c10;
-      --bg-soft:#101218;
-      --text:#e5e7eb;
-      --muted:#9aa0a6;
-      --brand:#4f46e5; /* indigo-600 */
-      --card:#111827;
-      --border:#1f2937;
+      --bg: #0a0a0a;           /* dark */
+      --text: #f5f5f7;
+      --muted:#8b8d93;
+      --tint:#0a84ff;          /* iOS blue */
+      --card: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.18);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     :root.light{
-      --bg:#ffffff;
-      --bg-soft:#f8fafc;
-      --text:#0f172a;
-      --muted:#475569;
-      --brand:#4f46e5;
-      --card:#ffffff;
-      --border:#e5e7eb;
+      --bg: #ffffff;           /* light */
+      --text:#111113;
+      --muted:#60636a;
+      --tint:#0071e3;          
+      --card: rgba(0,0,0,0.04);
+      --glass-border: rgba(0,0,0,0.10);
+      --shadow: 0 10px 24px rgba(0,0,0,.08);
+    }
+    :root.alt{                 /* optional deep blue-gray theme */
+      --bg:#303742;            
+      --text:#f7f8fa;
+      --muted:#c2c6cf;
+      --tint:#58a6ff;
+      --card: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.16);
+      --shadow: 0 10px 30px rgba(6,10,18,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text); line-height:1.6}
-    a{color:var(--brand); text-decoration:none}
+    body{margin:0; font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text","Segoe UI", Roboto, Inter, Helvetica, Arial;
+         background: radial-gradient(1200px 600px at 10% -10%, rgba(255,255,255,.06), transparent),
+                     radial-gradient(1000px 500px at 120% 10%, rgba(255,255,255,.05), transparent), var(--bg);
+         color:var(--text); line-height:1.6}
+    .container{max-width:980px; margin:0 auto; padding:24px}
+    a{color:var(--tint); text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1100px; margin:0 auto; padding:24px}
-    header{position:sticky; top:0; backdrop-filter:saturate(180%) blur(8px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid var(--border); z-index:10}
+
+    /* --- Glassy chrome --- */
+    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(16px);
+      background: color-mix(in oklab, var(--bg) 70%, transparent);
+      border-bottom:1px solid var(--glass-border)}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
     .nav a{padding:8px 10px; border-radius:10px}
-    .nav a.active, .nav a:hover{background:var(--bg-soft)}
-    .btn{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); background:var(--card); color:var(--text); padding:10px 14px; border-radius:12px}
-    .btn:hover{transform:translateY(-1px)}
-    .grid{display:grid; gap:18px}
-    @media(min-width:768px){ .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
-    @media(min-width:1024px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    .nav a:hover{background:color-mix(in oklab, var(--bg) 85%, transparent)}
 
-    /* Sections */
-    section{padding:56px 0; border-bottom:1px solid var(--border)}
-    .hero{display:grid; gap:20px; align-items:center}
-    @media(min-width:768px){ .hero{grid-template-columns:3fr 2fr} }
-    .avatar{width:140px; height:140px; border-radius:50%; border:2px solid var(--border); object-fit:cover}
-    .card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px}
-    .card h3{margin:0 0 6px 0}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid var(--glass-border);
+         background:var(--card); backdrop-filter:saturate(180%) blur(12px); box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px)}
+
+    section{padding:56px 0; border-bottom:1px solid color-mix(in oklab, var(--bg) 85%, transparent)}
+
+    .hero{display:grid; gap:22px; align-items:center}
+    @media(min-width:760px){ .hero{grid-template-columns:1.3fr .7fr} }
+    .avatar{width:120px; height:120px; border-radius:26px; object-fit:cover; border:1px solid var(--glass-border); box-shadow:var(--shadow)}
+
+    .card{background:var(--card); border:1px solid var(--glass-border); border-radius:18px; padding:18px; backdrop-filter:saturate(160%) blur(14px); box-shadow:var(--shadow)}
+
+    h1{font-size:clamp(28px,4vw,44px); line-height:1.1; margin:0 0 8px 0}
+    h2{font-size:clamp(22px,3vw,28px); margin:0 0 16px 0}
     .muted{color:var(--muted)}
-    .tag{display:inline-block; padding:2px 8px; border:1px solid var(--border); border-radius:999px; font-size:12px; margin-right:6px}
-    .footer{padding:32px 0; text-align:center; color:var(--muted)}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; padding:1px 6px; border:1px solid var(--border); border-bottom-width:2px; border-radius:6px}
+    .grid{display:grid; gap:14px}
+    @media(min-width:900px){ .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1000px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+
+    .list{margin:0; padding:0 0 0 18px}
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:var(--card); border:1px solid var(--glass-border); margin:2px 6px 2px 0}
+
+    footer{padding:36px 0; color:var(--muted); text-align:center}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; padding:.5px 6px; border:1px solid var(--glass-border); border-bottom-width:2px; border-radius:6px}
   </style>
 
   <script>
-    // Theme: respect user preference + persist choice
-    const applyTheme = (t) => {
-      document.documentElement.classList.toggle('light', t==='light');
+    // Theme handling: light / dark (default) / alt (#303742)
+    const setTheme = (t)=>{
+      document.documentElement.classList.remove('light','alt');
+      if(t==='light') document.documentElement.classList.add('light');
+      if(t==='alt') document.documentElement.classList.add('alt');
+      localStorage.setItem('theme', t);
     }
-    const getPref = () => localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    document.addEventListener('DOMContentLoaded', () => applyTheme(getPref()));
-    function toggleTheme(){
-      const next = getPref()==='light' ? 'dark' : 'light';
-      localStorage.setItem('theme', next); applyTheme(next);
+    const getTheme = ()=> localStorage.getItem('theme') || 'dark';
+    document.addEventListener('DOMContentLoaded', ()=> setTheme(getTheme()));
+
+    function cycleTheme(){
+      const order=['dark','light','alt'];
+      const cur=getTheme();
+      const next=order[(order.indexOf(cur)+1)%order.length];
+      setTheme(next);
+      const b=document.getElementById('themeBtn');
+      b.textContent = next==='light' ? '☀️ Light' : (next==='alt' ? '🌌 Blue‑Gray' : '🌙 Dark');
     }
+
     function copyEmail(){
       const email = document.getElementById('email').textContent.trim();
       navigator.clipboard.writeText(email).then(()=>{
-        const b = document.getElementById('copyBtn');
-        const old = b.textContent; b.textContent='Copied!';
-        setTimeout(()=> b.textContent=old, 1200);
-      });
+        const b=document.getElementById('copyBtn');
+        const old=b.textContent; b.textContent='Copied!'; setTimeout(()=> b.textContent=old, 1200);
+      })
     }
   </script>
 
@@ -92,9 +124,10 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Giorgio Colombo",
+    "jobTitle": "UX Researcher",
+    "affiliation": [{"@type":"Organization","name":"ETH Zürich"},{"@type":"Organization","name":"Singapore–ETH Centre"}],
+    "email":"mailto:colombo.giorgio1293@gmail.com",
     "url": "https://your-domain.com",
-    "jobTitle": "PhD Researcher",
-    "affiliation": {"@type":"Organization","name":"ETH Zurich"},
     "sameAs": [
       "https://scholar.google.com/",
       "https://orcid.org/",
@@ -107,18 +140,18 @@
 <body>
   <header>
     <div class="container nav">
-      <div style="display:flex; align-items:center; gap:10px">
-        <strong>GC</strong>
+      <div style="display:flex; align-items:center; gap:12px">
+        <strong style="letter-spacing:.4px">GC</strong>
         <nav style="display:flex; gap:8px">
-          <a href="#about" class="active">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#publications">Publications</a>
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#pubs">Publications</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
-      <div style="display:flex; gap:8px">
-        <button class="btn" onclick="toggleTheme()" aria-label="Toggle theme">🌓 Theme</button>
-        <a class="btn" href="/cv.pdf" target="_blank" rel="noopener">📄 CV</a>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button id="themeBtn" class="btn" onclick="cycleTheme()">🌙 Dark</button>
+        <a class="btn" href="cv.pdf" target="_blank" rel="noopener">📄 CV</a>
       </div>
     </div>
   </header>
@@ -127,92 +160,97 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div>
-        <h1 style="font-size:clamp(28px,4vw,46px); line-height:1.1; margin:0 0 10px 0">Hi, I'm Giorgio — I research early detection of cognitive risks and build usable digital tools.</h1>
-        <p class="muted" style="margin:0 0 18px 0">PhD Researcher at ETH Zurich / Singapore‑ETH Centre. I work on spatial navigation assessment (SPACE) and fall‑risk prediction integrating wearable data.</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <span class="tag">Spatial Navigation</span>
-          <span class="tag">Human‑Computer Interaction</span>
-          <span class="tag">Digital Health</span>
-          <span class="tag">UX Research</span>
+        <h1>Giorgio Colombo — PhD UX Researcher</h1>
+        <p class="muted" style="margin:0 0 14px 0">Future Health Technologies | Singapore–ETH Centre · Chair of Cognitive Science | ETH Zürich. I design and validate digital tools for early detection of cognitive risks, with a focus on spatial navigation and usable AI.</p>
+        <div>
+          <span class="pill">Spatial Navigation</span>
+          <span class="pill">Digital Health</span>
+          <span class="pill">Mixed‑Methods</span>
+          <span class="pill">Product Ownership</span>
         </div>
       </div>
       <div style="display:flex; justify-content:center">
-        <img class="avatar" src="/avatar.jpg" alt="Portrait of Giorgio Colombo" />
+        <img class="avatar" src="avatar.jpg" alt="Portrait of Giorgio Colombo" />
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT / QUICK FACTS -->
     <section id="about">
       <div class="grid cols-2">
         <div>
           <h2>About</h2>
-          <p>I'm an Italian PhD researcher at ETH Zurich focused on early detection of health risks and prevention. I design and validate digital cognitive tools, with a particular focus on spatial navigation as an early marker for cognitive impairment.</p>
-          <p>I enjoy collaborating across disciplines and turning research into practical tools clinicians can use.</p>
+          <p>UX Researcher with a PhD in Cognitive Science. I led the full lifecycle of <em>SPACE</em>—a serious‑game cognitive assessment recognised as an ACM CHI 2023 finalist—guiding it from concept and UX design through clinical and population‑level validation across diagnosis, imaging and fluid biomarkers, and wearable gait data. Currently nominated for the ETH Medal for Outstanding Doctoral Theses.</p>
         </div>
         <div class="card">
-          <h3>Quick facts</h3>
-          <ul style="margin:8px 0 0 18px">
-            <li>📍 Based in Zurich & Singapore (previously)</li>
-            <li>🧭 Creator of <em>SPACE</em> assessment suite</li>
-            <li>🧪 Published in <em>Computers in Human Behavior</em>; medRxiv 2025</li>
-            <li>🎤 Presenter at international conferences</li>
+          <h3 style="margin:0 0 8px 0">Highlights</h3>
+          <ul class="list">
+            <li>Product ownership for SPACE end‑to‑end</li>
+            <li>Experimental & mixed‑methods analytics (regression, mixed‑effects, ROC)</li>
+            <li>User‑centred evaluation: SUS/UEQ/NASA‑TLX, test–retest, accessibility</li>
+            <li>Stakeholder engagement with policy, clinical and industry partners</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h2>Selected Projects</h2>
-      <div class="grid cols-3">
-        <article class="card">
-          <h3>SPACE</h3>
-          <p class="muted">A scalable digital tool for assessing spatial navigation to detect early cognitive impairment.</p>
-          <p><a href="#">Read more →</a></p>
-        </article>
-        <article class="card">
-          <h3>sSPACE</h3>
-          <p class="muted">A short, clinic‑friendly version of SPACE with strong diagnostic performance in memory clinic cohorts.</p>
-          <p><a href="#">Preprint →</a></p>
-        </article>
-        <article class="card">
-          <h3>Fall‑Risk with Wearables</h3>
-          <p class="muted">Integrating gait metrics from sensors with cognitive markers to stratify fall risk in ageing populations.</p>
-          <p><a href="#">Study overview →</a></p>
-        </article>
+    <!-- WORK / EXPERIENCE (brief, minimal) -->
+    <section id="work">
+      <h2>Selected Experience</h2>
+      <div class="card">
+        <ul class="list">
+          <li><strong>Consultant, Data Analysis</strong> — ETH Zürich & Bond University (2025)</li>
+          <li><strong>PhD Researcher</strong> — ETH Zürich · Singapore–ETH Centre (2020–2025)</li>
+          <li><strong>Researcher</strong> — Ageing & Dementia Centre, Bournemouth University (2019–2020)</li>
+          <li><strong>Researcher</strong> — Memory & Learning Lab, University of Padova (2019)</li>
+          <li><strong>Researcher (Erasmus+)</strong> — Quality & Usability Lab, TU Berlin (2017)</li>
+        </ul>
       </div>
     </section>
 
-    <!-- PUBLICATIONS -->
-    <section id="publications">
-      <h2>Publications</h2>
+    <!-- PUBLICATIONS (trimmed) -->
+    <section id="pubs">
+      <h2>Publications (selection)</h2>
       <div class="card">
-        <ol style="margin:0 0 0 18px">
-          <li><strong>Spatial Navigation as a Digital Marker for Clinically Differentiating Cognitive Impairment Severity</strong> (2025). medRxiv. <a href="#">Link</a></li>
-          <li><strong>Usability of Spatial Navigation Interfaces Across the Adult Lifespan</strong> (2024). <em>Computers in Human Behavior</em>. <a href="#">Link</a></li>
+        <ol class="list">
+          <li><strong>Spatial navigation as a digital marker for clinically differentiating cognitive impairment severity</strong> (2025). <em>medRxiv</em>. Under review at <em>Nature Communications Medicine</em>.</li>
+          <li><strong>Detecting Cognitive Impairment Through an Age‑Friendly Serious Game (SPACE)</strong> (2024). <em>Computers in Human Behavior</em>.</li>
+          <li><strong>Beyond traditional assessments of cognitive impairment: spatial navigation tasks</strong> (2024). <em>medRxiv</em>.</li>
+          <li><strong>SPACE: Assessing hippocampal structural integrity in older adults</strong> (2024). <em>Research Square</em>.</li>
         </ol>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="awards">
+      <h2>Awards</h2>
+      <div class="card">
+        <ul class="list">
+          <li>ACM CHI 2023 Student Game Competition — Finalist</li>
+          <li>ETH Zürich Medal for Outstanding Doctoral Theses — Nomination (2025)</li>
+        </ul>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-      <h2>Get in touch</h2>
-      <p>I'm open to collaborations, speaking, and consulting. Best way to reach me is by email.</p>
-      <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+      <h2>Contact</h2>
+      <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
         <div>
           <div class="muted" style="font-size:14px">Email</div>
-          <div id="email">giorgio@example.com</div>
+          <div id="email">colombo.giorgio1293@gmail.com</div>
         </div>
         <div style="display:flex; gap:8px">
           <button id="copyBtn" class="btn" onclick="copyEmail()">Copy</button>
-          <a class="btn" href="mailto:giorgio@example.com">Compose</a>
+          <a class="btn" href="mailto:colombo.giorgio1293@gmail.com">Compose</a>
+          <a class="btn" href="cv.pdf" target="_blank" rel="noopener">Open CV</a>
         </div>
       </div>
+      <p class="muted" style="margin-top:8px">Languages: Italian, English, French</p>
       <p class="muted">Press <span class="kbd">/</span> to jump to search (coming soon)</p>
     </section>
 
-    <footer class="footer">
-      <div>© <span id="y"></span> Giorgio Colombo · Built with vanilla HTML/CSS</div>
+    <footer>
+      <div>© <span id="y"></span> Giorgio Colombo</div>
     </footer>
   </main>
 
