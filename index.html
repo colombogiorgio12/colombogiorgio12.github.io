@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Giorgio Colombo — UX Researcher</title>
+  <title>Giorgio Colombo, PhD — UX Researcher | Clinical validation</title>
   <meta name="description" content="Giorgio Colombo — PhD UX Researcher. Spatial navigation, digital health, and usable AI." />
 
   <!-- Open Graph / Twitter -->
@@ -17,96 +17,171 @@
   <link rel="icon" href="/favicon.ico" />
 
   <style>
-    /* --- System font stack (Apple-like) --- */
+    /* --- Liquid Glass theme (Apple-inspired) --- */
     :root{
-      --bg: #0a0a0a;           /* dark */
-      --text: #f5f5f7;
-      --muted:#8b8d93;
-      --tint:#0a84ff;          /* iOS blue */
-      --card: rgba(255,255,255,0.06);
-      --glass-border: rgba(255,255,255,0.18);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --bg:#0b0b0c;                 /* dark bg */
+      --text:#f5f7fa;
+      --muted:#9aa3ad;
+      --tint:#0a84ff;               /* iOS blue */
+      --tint-2:#95a3b6;             /* blue/gray accents */
+      --panel:rgba(255,255,255,.06);
+      --glass:rgba(255,255,255,.18);
+      --shadow:0 6px 18px rgba(0,0,0,.14);
+      --radius:20px; --bw:1.2px;
+      --thumb:#10131a;              /* publication thumb */
     }
     :root.light{
-      --bg: #ffffff;           /* light */
-      --text:#111113;
-      --muted:#60636a;
-      --tint:#0071e3;          
-      --card: rgba(0,0,0,0.04);
-      --glass-border: rgba(0,0,0,0.10);
-      --shadow: 0 10px 24px rgba(0,0,0,.08);
+      --bg:#fafbff;                 /* nicer white with tiny blue cast */
+      --text:#0b0d12;
+      --muted:#5c636f;
+      --tint:#0071e3;               /* Apple link blue */
+      --tint-2:#3d4a5e;
+      --panel:rgba(0,0,0,.035);
+      --glass:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --thumb:#eef2ff;
     }
-    :root.alt{                 /* optional deep blue-gray theme */
-      --bg:#303742;            
-      --text:#f7f8fa;
-      --muted:#c2c6cf;
-      --tint:#58a6ff;
-      --card: rgba(255,255,255,0.08);
-      --glass-border: rgba(255,255,255,0.16);
-      --shadow: 0 10px 30px rgba(6,10,18,.35);
+    /* BLUE theme = still light, but stronger blue accents and subtle sky gradient */
+    :root.blue{
+      --bg:linear-gradient(180deg,#f6f9ff 0%,#ffffff 60%);
+      --text:#0d1425;
+      --muted:#51607a;
+      --tint:#0a84ff;               /* saturated blue */
+      --tint-2:#274569;             /* headings/badges */
+      --panel:rgba(24,58,112,.06);
+      --glass:rgba(24,58,112,.15);
+      --shadow:0 12px 34px rgba(22,48,97,.18);
+      --thumb:#e8f0ff;
     }
+    /* ALT = blue‑gray TEXT tone you requested (#303742) */
+    :root.alt{
+      --bg:#fafbff;
+      --text:#303742;
+      --muted:#60697a;
+      --tint:#1f6feb;
+      --tint-2:#3d4a5e;
+      --panel:rgba(0,0,0,.035);
+      --glass:rgba(0,0,0,.10);
+      --thumb:#eef2ff;
+    }
+    /* LIQUID (Apple-like UI you shared) */
+    :root.liquid{
+      --bg: radial-gradient(1200px 700px at 20% -10%, rgba(56,132,255,.25), transparent 60%),
+            radial-gradient(1000px 600px at 110% 0%, rgba(0,122,255,.18), transparent 60%),
+            linear-gradient(180deg,#e6f0ff 0%,#f9fbff 40%,#ffffff 100%);
+      --text:#0a0e18;
+      --muted:#4a5b74;
+      --tint:#0a84ff;
+      --tint-2:#2a4d78;
+      --panel:rgba(255,255,255,.30);
+      --glass:rgba(255,255,255,.55);
+      --shadow:0 20px 60px rgba(12,45,90,.12);
+      --thumb:#e9f2ff;
+    }
+
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text","Segoe UI", Roboto, Inter, Helvetica, Arial;
-         background: radial-gradient(1200px 600px at 10% -10%, rgba(255,255,255,.06), transparent),
-                     radial-gradient(1000px 500px at 120% 10%, rgba(255,255,255,.05), transparent), var(--bg);
+    body{margin:0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+         font-feature-settings:"cv10" 1; /* cleaner numerals */
+         font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", Segoe UI, Inter, Roboto, Helvetica, Arial;
+         background: var(--bg);
          color:var(--text); line-height:1.6}
-    .container{max-width:980px; margin:0 auto; padding:24px}
+    .container{max-width:1000px; margin:0 auto; padding:24px}
     a{color:var(--tint); text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* --- Glassy chrome --- */
-    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(16px);
-      background: color-mix(in oklab, var(--bg) 70%, transparent);
-      border-bottom:1px solid var(--glass-border)}
+    /* --- Nav --- */
+    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(18px); background: color-mix(in oklab, var(--bg) 80%, transparent); border-bottom:var(--bw) solid var(--glass)}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
-    .nav a{padding:8px 10px; border-radius:10px}
+    .nav a{padding:8px 10px; border-radius:10px; color:var(--tint-2)}
     .nav a:hover{background:color-mix(in oklab, var(--bg) 85%, transparent)}
 
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid var(--glass-border);
-         background:var(--card); backdrop-filter:saturate(180%) blur(12px); box-shadow:var(--shadow)}
+    /* --- Liquid glass cards --- */
+    .glass{position:relative; background:var(--panel); border-radius:var(--radius); backdrop-filter:saturate(160%) blur(16px); box-shadow:var(--shadow); transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+    .glass.inner{background:color-mix(in oklab, var(--bg) 92%, transparent); border:var(--bw) solid var(--glass)}
+    .glass.outer{background:var(--panel)}
+    /* OUTER cards get rainbow draw from BL & TR corners */
+    .glass.outer::before{content:""; position:absolute; inset:0; border-radius:inherit; padding:var(--bw);
+      background:conic-gradient(from 0deg at 0% 100%, #ff6b6b, #f7b955, #ffd166, #7bd88f, #4cc9f0, #a78bfa, #ff6bcb, #ff6b6b),
+                 conic-gradient(from 180deg at 100% 0%, #ff6b6b, #f7b955, #ffd166, #7bd88f, #4cc9f0, #a78bfa, #ff6bcb, #ff6b6b);
+      background-repeat:no-repeat; background-position:0% 100%, 100% 0%;
+      background-size:var(--s,0%) var(--s,0%), var(--s,0%) var(--s,0%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; opacity:0;
+      transition: background-size .45s cubic-bezier(.2,.8,.2,1), opacity .22s, filter .35s;
+    }
+    .glass.outer:hover::before{--s:100%; opacity:1; filter:saturate(1.08)}
+    /* INNER cards keep a clean white border */
+    .glass.inner::before{content:""; position:absolute; inset:0; border-radius:inherit; padding:var(--bw); background:linear-gradient(#fff,#fff);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; opacity:.6; transition:opacity .25s}
+    .glass.inner:hover::before{opacity:1}
+    /* subtle specular highlights for all glass */
+    .glass::after{content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; background: radial-gradient(600px 200px at 10% 0%, rgba(255,255,255,.16), transparent 60%), radial-gradient(400px 160px at 90% 10%, rgba(255,255,255,.10), transparent 60%);}    
+
+    .card{padding:20px}
+
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:4px 8px; border-radius:10px; border:0; background:transparent; color:var(--text);} .btn:hover{transform:none} 
     .btn:hover{transform:translateY(-1px)}
 
     section{padding:56px 0; border-bottom:1px solid color-mix(in oklab, var(--bg) 85%, transparent)}
 
     .hero{display:grid; gap:22px; align-items:center}
     @media(min-width:760px){ .hero{grid-template-columns:1.3fr .7fr} }
-    .avatar{width:120px; height:120px; border-radius:26px; object-fit:cover; border:1px solid var(--glass-border); box-shadow:var(--shadow)}
+    .avatar{width:128px; height:128px; border-radius:26px; object-fit:cover; border:var(--bw) solid var(--glass); box-shadow:var(--shadow)}
 
-    .card{background:var(--card); border:1px solid var(--glass-border); border-radius:18px; padding:18px; backdrop-filter:saturate(160%) blur(14px); box-shadow:var(--shadow)}
-
-    h1{font-size:clamp(28px,4vw,44px); line-height:1.1; margin:0 0 8px 0}
+    h1{font-size:clamp(28px,4vw,46px); line-height:1.1; margin:0 0 8px 0}
     h2{font-size:clamp(22px,3vw,28px); margin:0 0 16px 0}
     .muted{color:var(--muted)}
-    .grid{display:grid; gap:14px}
+    .grid{display:grid; gap:16px}
     @media(min-width:900px){ .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
     @media(min-width:1000px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
 
     .list{margin:0; padding:0 0 0 18px}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:var(--card); border:1px solid var(--glass-border); margin:2px 6px 2px 0}
+    .pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--panel); border:var(--bw) solid var(--glass); margin:2px 6px 2px 0; color:var(--tint-2)}
 
     footer{padding:36px 0; color:var(--muted); text-align:center}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; padding:.5px 6px; border:1px solid var(--glass-border); border-bottom-width:2px; border-radius:6px}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; padding:.5px 6px; border:var(--bw) solid var(--glass); border-bottom-width:2px; border-radius:6px}
+
+    /* Publications grid */
+    .pubgrid{display:grid; gap:16px}
+    @media(min-width:760px){ .pubgrid{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1100px){ .pubgrid{grid-template-columns:repeat(3,1fr)} }
+    .pub{overflow:hidden; transition:transform .22s cubic-bezier(.2,.8,.2,1), backdrop-filter .25s ease, filter .25s ease} .pub:hover{transform:scale(1.025); backdrop-filter:saturate(180%) blur(22px); } .thumb{transition:transform .22s cubic-bezier(.2,.8,.2,1)} .pub:hover .thumb{transform:scale(1.04)} .pub:hover{transform:scale(1.02); backdrop-filter:saturate(180%) blur(18px)} .thumb{transition:transform .22s cubic-bezier(.2,.8,.2,1)} .pub:hover .thumb{transform:scale(1.03)}
+    .thumb{height:180px; border-radius:calc(var(--radius) - 6px); background:linear-gradient(120deg,var(--thumb),color-mix(in oklab,var(--tint) 16%, transparent)); display:flex; align-items:center; justify-content:center; color:var(--tint); font-weight:600; letter-spacing:.2px}
+    .pub h3{margin:10px 0 4px}
+    .pub p{margin:0; color:var(--muted)}
+  .hover-blur:hover .glass{filter:blur(2px) brightness(.95)} .hover-blur .glass:hover{filter:none; transform:scale(1.02); z-index:2}
   </style>
 
   <script>
-    // Theme handling: light / dark (default) / alt (#303742)
-    const setTheme = (t)=>{
-      document.documentElement.classList.remove('light','alt');
+    // Theme handling: light / blue / alt / liquid
+    const setTheme=(t)=>{
+      document.documentElement.classList.remove('light','blue','alt','liquid');
       if(t==='light') document.documentElement.classList.add('light');
+      if(t==='blue') document.documentElement.classList.add('blue');
       if(t==='alt') document.documentElement.classList.add('alt');
+      if(t==='liquid') document.documentElement.classList.add('liquid');
       localStorage.setItem('theme', t);
     }
-    const getTheme = ()=> localStorage.getItem('theme') || 'dark';
+    const getTheme=()=> localStorage.getItem('theme') || 'liquid';
     document.addEventListener('DOMContentLoaded', ()=> setTheme(getTheme()));
+    // Keyboard shortcuts to switch theme: L=Liquid, B=Blue, W=Light, A=Alt
+    window.addEventListener('keydown', (e)=>{
+      const k=e.key.toLowerCase();
+      if(k==='l') setTheme('liquid');
+      if(k==='b') setTheme('blue');
+      if(k==='w') setTheme('light');
+      if(k==='a') setTheme('alt');
+    });
 
     function cycleTheme(){
-      const order=['dark','light','alt'];
+      const order=['light','blue','dark','alt'];
       const cur=getTheme();
       const next=order[(order.indexOf(cur)+1)%order.length];
       setTheme(next);
       const b=document.getElementById('themeBtn');
-      b.textContent = next==='light' ? '☀️ Light' : (next==='alt' ? '🌌 Blue‑Gray' : '🌙 Dark');
+      b.textContent = next==='light' ? '☀️ Light' : (next==='blue' ? '💧 Blue' : (next==='alt' ? '🫧 Blue‑Gray' : '🌙 Dark'));
     }
 
     function copyEmail(){
@@ -140,37 +215,39 @@
 <body>
   <header>
     <div class="container nav">
-      <div style="display:flex; align-items:center; gap:12px">
-        <strong style="letter-spacing:.4px">GC</strong>
-        <nav style="display:flex; gap:8px">
+      <div style="display:flex; align-items:center; gap:16px">
+        <strong style="letter-spacing:1px; font-size:34px; font-weight:900">GC</strong>
+        <nav style="display:flex; gap:18px">
           <a href="#about">About</a>
-          <a href="#work">Work</a>
+          <a href="#work">Working Experience</a>
           <a href="#pubs">Publications</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap">
-        <button id="themeBtn" class="btn" onclick="cycleTheme()">🌙 Dark</button>
-        <a class="btn" href="cv.pdf" target="_blank" rel="noopener">📄 CV</a>
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="cv.pdf" target="_blank" rel="noopener" style="color:var(--tint); font-weight:900; font-size:20px">CV</a>
       </div>
     </div>
+  </header>
+</div>
   </header>
 
   <main class="container">
     <!-- HERO -->
-    <section class="hero" id="home">
-      <div>
-        <h1>Giorgio Colombo — PhD UX Researcher</h1>
-        <p class="muted" style="margin:0 0 14px 0">Future Health Technologies | Singapore–ETH Centre · Chair of Cognitive Science | ETH Zürich. I design and validate digital tools for early detection of cognitive risks, with a focus on spatial navigation and usable AI.</p>
-        <div>
-          <span class="pill">Spatial Navigation</span>
-          <span class="pill">Digital Health</span>
-          <span class="pill">Mixed‑Methods</span>
-          <span class="pill">Product Ownership</span>
+    <section class="hero hover-blur" id="home">
+      <div class="glass card">
+        <h1>Giorgio Colombo, PhD</h1>
+        <h2 style="margin:6px 0 12px 0; font-weight:600; color:var(--tint-2)">UX Researcher | Clinical validation</h2>
+        <p class="muted" style="margin:0 0 14px 0">PhD in Cognitive Science and Future Health Technologies (ETH Zürich & Singapore–ETH Centre). I led the full lifecycle of the SPACE product — from conceptualisation to development, testing, usability, and clinical validation — to enable early detection of cognitive risks.</p>
+        <div style="margin-top:10px">
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94-9.94-5.74L8 4.69 14.31 8z"/></svg> Spatial Navigation</span>
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg> Digital Health</span>
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v7h7"/><path d="M21 21v-7h-7"/><path d="M3 14a9 9 0 0 0 9 7"/><path d="M21 10a9 9 0 0 0-9-7"/></svg> Mixed‑Methods</span>
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Product Ownership</span>
         </div>
       </div>
       <div style="display:flex; justify-content:center">
-        <img class="avatar" src="avatar.jpg" alt="Portrait of Giorgio Colombo" />
+        <img class="avatar glass" src="avatar.jpg" alt="Portrait of Giorgio Colombo" />
       </div>
     </section>
 
@@ -179,51 +256,116 @@
       <div class="grid cols-2">
         <div>
           <h2>About</h2>
-          <p>UX Researcher with a PhD in Cognitive Science. I led the full lifecycle of <em>SPACE</em>—a serious‑game cognitive assessment recognised as an ACM CHI 2023 finalist—guiding it from concept and UX design through clinical and population‑level validation across diagnosis, imaging and fluid biomarkers, and wearable gait data. Currently nominated for the ETH Medal for Outstanding Doctoral Theses.</p>
+          <p>UX Researcher with a PhD in Cognitive Science. I lead end‑to‑end research and product work for <em>SPACE</em>, a serious‑game cognitive assessment. My focus is healthcare UX and scientific validation: designing age‑friendly interactions, running mixed‑methods studies, and validating against biomarkers (hippocampal MRI, blood), cognitive screens, and gait metrics from wearables.</p>
         </div>
-        <div class="card">
+        <div class="glass outer card">
           <h3 style="margin:0 0 8px 0">Highlights</h3>
-          <ul class="list">
-            <li>Product ownership for SPACE end‑to‑end</li>
-            <li>Experimental & mixed‑methods analytics (regression, mixed‑effects, ROC)</li>
-            <li>User‑centred evaluation: SUS/UEQ/NASA‑TLX, test–retest, accessibility</li>
-            <li>Stakeholder engagement with policy, clinical and industry partners</li>
-          </ul>
+          <div class="grid cols-2" style="gap:18px">
+            <article class="glass inner card"><div style="font-size:20px; margin-bottom:6px">🧓</div><strong>Healthcare UX</strong><p class="muted" style="margin:6px 0 0 0">Age‑friendly flows and accessibility that reduce burden for older adults.</p></article>
+            <article class="glass inner card"><div style="font-size:20px; margin-bottom:6px">🧠</div><strong>Validation pipeline</strong><p class="muted" style="margin:6px 0 0 0">From usability → cognitive tests → MRI and blood biomarkers.</p></article>
+            <article class="glass inner card"><div style="font-size:20px; margin-bottom:6px">📈</div><strong>Robust analytics</strong><p class="muted" style="margin:6px 0 0 0">Mixed‑effects, regression, ROC/AUC, clinical performance.</p></article>
+            <article class="glass inner card"><div style="font-size:20px; margin-bottom:6px">🏃</div><strong>Wearables & gait</strong><p class="muted" style="margin:6px 0 0 0">Mobility data for fall‑risk and population‑level insight.</p></article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- WORK / EXPERIENCE (brief, minimal) -->
-    <section id="work">
-      <h2>Selected Experience</h2>
-      <div class="card">
-        <ul class="list">
-          <li><strong>Consultant, Data Analysis</strong> — ETH Zürich & Bond University (2025)</li>
-          <li><strong>PhD Researcher</strong> — ETH Zürich · Singapore–ETH Centre (2020–2025)</li>
-          <li><strong>Researcher</strong> — Ageing & Dementia Centre, Bournemouth University (2019–2020)</li>
-          <li><strong>Researcher</strong> — Memory & Learning Lab, University of Padova (2019)</li>
-          <li><strong>Researcher (Erasmus+)</strong> — Quality & Usability Lab, TU Berlin (2017)</li>
-        </ul>
+    <section id="work" class="hover-blur">
+      <h2>Working Experience</h2>
+      <div class="glass card" style="overflow:hidden">
+        <div class="xp-track" id="xpTrack" style="display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:12px; align-items:stretch">
+          <article class="glass card" style="scroll-snap-align:center; min-width:300px; flex:0 0 300px; text-align:left">
+            <img src="logos/eth.png" alt="ETH Zürich" style="width:44px; height:44px; object-fit:contain; border-radius:12px; display:block; margin-bottom:8px"/>
+            <strong>Consultant, Data Analysis</strong>
+            <div class="muted">ETH Zürich & Bond University · 2025</div>
+          </article>
+          <article class="glass card" style="scroll-snap-align:center; min-width:300px; flex:0 0 300px">
+            <img src="logos/sec.png" alt="Singapore–ETH Centre" style="width:44px; height:44px; object-fit:contain; border-radius:12px; display:block; margin-bottom:8px"/>
+            <strong>PhD Researcher</strong>
+            <div class="muted">ETH Zürich · Singapore–ETH Centre · 2020–2025</div>
+          </article>
+          <article class="glass card" style="scroll-snap-align:center; min-width:300px; flex:0 0 300px">
+            <img src="logos/bu.png" alt="Bournemouth University" style="width:44px; height:44px; object-fit:contain; border-radius:12px; display:block; margin-bottom:8px"/>
+            <strong>Researcher</strong>
+            <div class="muted">Bournemouth University · 2019–2020</div>
+          </article>
+          <article class="glass card" style="scroll-snap-align:center; min-width:300px; flex:0 0 300px">
+            <img src="logos/padova.png" alt="University of Padova" style="width:44px; height:44px; object-fit:contain; border-radius:12px; display:block; margin-bottom:8px"/>
+            <strong>Researcher</strong>
+            <div class="muted">University of Padova · 2019</div>
+          </article>
+          <article class="glass card" style="scroll-snap-align:center; min-width:300px; flex:0 0 300px">
+            <img src="logos/tlabs.png" alt="Telekom Innovation Laboratories" style="width:44px; height:44px; object-fit:contain; border-radius:12px; display:block; margin-bottom:8px"/>
+            <strong>Researcher (Erasmus+)</strong>
+            <div class="muted">TU Berlin · 2017</div>
+          </article>
+          <article class="glass card" style="scroll-snap-align:center; min-width:300px; flex:0 0 300px">
+            <img src="logos/paris7.png" alt="Université Paris Diderot" style="width:44px; height:44px; object-fit:contain; border-radius:12px; display:block; margin-bottom:8px"/>
+            <strong>Visiting student</strong>
+            <div class="muted">Université Paris Diderot</div>
+          </article>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="glass card">
+        <h3 style="margin:0 0 8px 0">Highlights</h3>
+        <div class="hl-track" style="display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px 2px">
+          <article class="glass card" style="min-width:240px; scroll-snap-align:center; text-align:left">
+            <div style="font-size:20px; margin-bottom:6px">🧓</div>
+            <strong>Healthcare UX</strong>
+            <p class="muted" style="margin:6px 0 0 0">Age‑friendly flows and accessibility that reduce burden for older adults.</p>
+          </article>
+          <article class="glass card" style="min-width:240px; scroll-snap-align:center">
+            <div style="font-size:20px; margin-bottom:6px">🧠</div>
+            <strong>Validation pipeline</strong>
+            <p class="muted" style="margin:6px 0 0 0">From usability → cognitive tests → MRI and blood biomarkers.</p>
+          </article>
+          <article class="glass card" style="min-width:240px; scroll-snap-align:center">
+            <div style="font-size:20px; margin-bottom:6px">📈</div>
+            <strong>Robust analytics</strong>
+            <p class="muted" style="margin:6px 0 0 0">Mixed‑effects, regression, and ROC/AUC for clinical performance.</p>
+          </article>
+          <article class="glass card" style="min-width:240px; scroll-snap-align:center">
+            <div style="font-size:20px; margin-bottom:6px">🏃</div>
+            <strong>Wearables & gait</strong>
+            <p class="muted" style="margin:6px 0 0 0">Integrating mobility data for fall‑risk and population‑level insight.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- PUBLICATIONS (trimmed) -->
     <section id="pubs">
-      <h2>Publications (selection)</h2>
-      <div class="card">
-        <ol class="list">
-          <li><strong>Spatial navigation as a digital marker for clinically differentiating cognitive impairment severity</strong> (2025). <em>medRxiv</em>. Under review at <em>Nature Communications Medicine</em>.</li>
-          <li><strong>Detecting Cognitive Impairment Through an Age‑Friendly Serious Game (SPACE)</strong> (2024). <em>Computers in Human Behavior</em>.</li>
-          <li><strong>Beyond traditional assessments of cognitive impairment: spatial navigation tasks</strong> (2024). <em>medRxiv</em>.</li>
-          <li><strong>SPACE: Assessing hippocampal structural integrity in older adults</strong> (2024). <em>Research Square</em>.</li>
-        </ol>
+      <h2>Publications</h2>
+      <div class="pubgrid">
+        <article class="glass card pub">
+          <div class="thumb">Clinical Differentiation</div>
+          <h3>Spatial navigation as a digital marker for clinically differentiating cognitive impairment severity</h3>
+          <p><em>medRxiv</em>, 2025 — Under review at <em>Nature Communications Medicine</em>. Combines serious‑game metrics with clinical ratings to separate impairment levels.</p>
+        </article>
+        <article class="glass card pub">
+          <div class="thumb">Serious Game UX</div>
+          <h3>Detecting Cognitive Impairment Through an Age‑Friendly Serious Game (SPACE)</h3>
+          <p><em>Computers in Human Behavior</em>, 2024 — Usability across the adult lifespan; interface adaptations improve older‑adult performance and experience.</p>
+        </article>
+        <article class="glass card pub">
+          <div class="thumb">Hippocampal MRI</div>
+          <h3>SPACE performance and hippocampal structural integrity</h3>
+          <p><em>Research Square</em>, 2024 — Links SPACE metrics to hippocampal volume, supporting biological validity.</p>
+        </article>
+        <article class="glass card pub">
+          <div class="thumb">Beyond MoCA</div>
+          <h3>Beyond traditional assessments of cognitive impairment: spatial navigation tasks</h3>
+          <p><em>medRxiv</em>, 2024 — Shows how navigation measures complement cognitive screening for earlier, domain‑specific deficits.</p>
+        </article>
       </div>
     </section>
 
     <!-- AWARDS -->
     <section id="awards">
       <h2>Awards</h2>
-      <div class="card">
+      <div class="glass card">
         <ul class="list">
           <li>ACM CHI 2023 Student Game Competition — Finalist</li>
           <li>ETH Zürich Medal for Outstanding Doctoral Theses — Nomination (2025)</li>
@@ -232,21 +374,21 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact">
+    <section id="contact" class="hover-blur">
       <h2>Contact</h2>
-      <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
-        <div>
-          <div class="muted" style="font-size:14px">Email</div>
-          <div id="email">colombo.giorgio1293@gmail.com</div>
-        </div>
-        <div style="display:flex; gap:8px">
-          <button id="copyBtn" class="btn" onclick="copyEmail()">Copy</button>
-          <a class="btn" href="mailto:colombo.giorgio1293@gmail.com">Compose</a>
-          <a class="btn" href="cv.pdf" target="_blank" rel="noopener">Open CV</a>
-        </div>
+      <div class="glass card" style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:10px">
+          <li style="display:flex; align-items:center; gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg><a href="mailto:colombo.giorgio1293@gmail.com">Email</a></li>
+          <li style="display:flex; align-items:center; gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5.001zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-.9 1.7-1.9 3.6-1.9 3.9 0 4.6 2.5 4.6 5.7V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z"/></svg><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li style="display:flex; align-items:center; gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l8 6-8 6-8-6 8-6zm0 8.5l8 6-8 4.5-8-4.5 8-6z"/></svg><a href="#" target="_blank" rel="noopener">Google Scholar</a></li>
+        </ul>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:10px">
+          <li style="display:flex; align-items:center; gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg><a href="#" target="_blank" rel="noopener">ORCID</a></li>
+          <li style="display:flex; align-items:center; gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><a href="#" target="_blank" rel="noopener">Singapore–ETH Centre</a></li>
+          <li style="display:flex; align-items:center; gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><a href="cv.pdf" target="_blank" rel="noopener">CV (PDF)</a></li>
+        </ul>
       </div>
-      <p class="muted" style="margin-top:8px">Languages: Italian, English, French</p>
-      <p class="muted">Press <span class="kbd">/</span> to jump to search (coming soon)</p>
+      <p class="muted" style="margin-top:10px">Languages: Italian, English, French</p>
     </section>
 
     <footer>
@@ -256,6 +398,15 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Auto-scroll experience track + pause on hover
+    const track = document.getElementById('xpTrack');
+    if(track){
+      let dir = 1;
+      let timer = setInterval(()=>{ track.scrollBy({left: 1*dir, behavior: 'auto'}); if(track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) dir = -1; if(track.scrollLeft <= 2) dir = 1; }, 16);
+      track.addEventListener('mouseenter', ()=> clearInterval(timer));
+      track.addEventListener('mouseleave', ()=>{ timer = setInterval(()=>{ track.scrollBy({left: 1*dir, behavior: 'auto'}); if(track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) dir = -1; if(track.scrollLeft <= 2) dir = 1; }, 16); });
+    }
   </script>
 </body>
 </html>
